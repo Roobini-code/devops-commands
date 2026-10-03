@@ -61,6 +61,46 @@ docker rm -f <container>                                          # Force-stop a
 
 `-d` runs in the background; `-it` allocates an interactive terminal; `--rm` removes the container after it exits; and `-p HOST_PORT:CONTAINER_PORT` publishes a port. Binding to `127.0.0.1` limits access to the local machine.
 
+### Delete containers and images
+
+These commands delete resources from the **local Docker daemon**. Removing a container does not normally remove its image or a named volume. Removing a local image does not delete the image from Docker Hub or another registry.
+
+```sh
+docker container ls -a                                      # List all containers so you can confirm the name or ID.
+docker stop <container>                                      # Gracefully stop the container before removing it.
+docker rm <container>                                        # Remove a stopped container by name or ID.
+docker rm -f <container>                                     # Force-stop and remove a container.
+docker rm -v <container>                                     # Remove the container and its anonymous volumes; named volumes remain.
+docker container prune                                       # Remove all stopped containers after confirmation.
+docker container prune -f                                    # Remove all stopped containers without a confirmation prompt.
+docker image ls                                              # List local images and their tags before deleting.
+docker image rm <image>:<tag>                                # Remove a local image tag, e.g. docker image rm nginx:1.27.
+docker image rm <image-id>                                   # Remove a local image by its image ID.
+docker image rm -f <image>:<tag>                             # Force-remove the local tag; containers may still retain image layers.
+docker image prune                                           # Remove dangling local images after confirmation.
+docker image prune -a                                        # Remove all local images not used by any container after confirmation.
+docker image prune -a -f                                     # Do the same image cleanup without a confirmation prompt.
+docker system prune -a                                       # Remove unused containers, networks, images, and build cache.
+```
+
+To remove every container or every image explicitly, first review the IDs printed by the list command. These examples use a POSIX shell:
+
+```sh
+docker container ls -aq                                     # Preview IDs of every container, including stopped ones.
+docker container ls -aq | xargs -r docker rm -f             # Force-remove every container; this interrupts running containers.
+docker image ls -aq                                          # Preview IDs of all local images.
+docker image ls -aq | sort -u | xargs -r docker image rm -f  # Force-remove all local images; containers may need to be removed first.
+```
+
+In PowerShell, use these equivalents:
+
+```powershell
+docker container ls -aq | ForEach-Object { docker rm -f $_ } # Force-remove each local container.
+docker image ls -aq | Sort-Object -Unique | ForEach-Object { docker image rm -f $_ } # Force-remove each local image.
+```
+
+Deleting a published image from Docker Hub is a separate registry operation; `docker image rm` only removes the local copy. Delete repository tags or the repository using Docker Hub's web interface or registry-supported API.
+
 ## 4. Inspect, access, and troubleshoot containers
 
 ```sh
