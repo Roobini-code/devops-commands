@@ -6,6 +6,35 @@ so you can grep it, print it, or read it end-to-end.
 > Convention: `#` prompt = must be root · `$` prompt = normal user is fine.
 > Replace anything in `<angle brackets>` with your real value.
 
+## Frequently used commands
+
+Quick recall for common day-to-day tasks. The full reference below groups commands by topic and explains them in more detail.
+
+| Command | What it does |
+|---|---|
+| `pwd` | Prints the current working directory. |
+| `ls -lah` | Lists files, including hidden ones, with readable sizes and details. |
+| `cd <directory>` | Changes to a directory; use `cd -` to return to the previous one. |
+| `mkdir -p <path>` | Creates a directory and any missing parent directories. |
+| `cp -r <source> <destination>` | Copies a directory tree. |
+| `mv <source> <destination>` | Moves or renames a file or directory. |
+| `less <file>` | Reads a file interactively; press `q` to quit. |
+| `head -n 20 <file>` / `tail -n 20 <file>` | Shows the first or last 20 lines. |
+| `grep -Rni '<text>' <path>` | Searches recursively for text, ignoring case and showing line numbers. |
+| `find <path> -name '<pattern>'` | Finds files by name. |
+| `chmod +x <file>` | Makes a file executable. |
+| `sudo <command>` | Runs a command with administrator privileges. |
+| `ps aux` | Lists running processes. |
+| `top` | Monitors processes and system load interactively. |
+| `df -h` | Shows filesystem space usage in readable units. |
+| `du -sh <path>` | Shows the total size of a file or directory. |
+| `ip addr` | Shows network interfaces and IP addresses. |
+| `ping -c 4 <host>` | Sends four network connectivity checks. |
+| `systemctl status <service>` | Checks the status of a systemd service. |
+| `journalctl -u <service> -f` | Follows logs for a systemd service. |
+| `history` | Lists commands from the current shell history. |
+| `man <command>` / `<command> --help` | Opens detailed or concise command help. |
+
 ---
 
 ## Table of contents

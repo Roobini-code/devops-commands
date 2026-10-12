@@ -2,6 +2,29 @@
 
 A workflow-oriented reference for commonly used Docker Engine, Docker Compose, Buildx, and Swarm commands. Every command has a short explanation beside it. Replace placeholders such as `<container>`, `<image>`, and `<service>` with your values. Commands use POSIX shell syntax unless labeled PowerShell.
 
+## Frequently used commands
+
+Keep this short list handy for everyday Docker work; the sections below cover each command and its options in more detail.
+
+```sh
+docker ps                                      # List running containers.
+docker ps -a                                   # List all containers, including stopped ones.
+docker images                                  # List local images.
+docker pull <image>:<tag>                      # Download an image.
+docker build -t <name>:<tag> .                 # Build an image from the current directory.
+docker run -d --name <container> -p 8080:80 <image> # Start a container in the background and publish a port.
+docker logs -f <container>                     # Follow a container's logs.
+docker exec -it <container> sh                 # Open an interactive shell in a running container.
+docker stop <container>                        # Stop a running container.
+docker start <container>                       # Start a stopped container.
+docker rm <container>                          # Remove a stopped container.
+docker image rm <image>:<tag>                  # Remove a local image.
+docker compose up -d                           # Start services from the current Compose project.
+docker compose ps                              # Show Compose project containers.
+docker compose logs -f                         # Follow logs from Compose services.
+docker compose down                            # Stop and remove Compose project containers and networks.
+```
+
 ## 1. Check Docker installation and daemon
 
 ```sh
